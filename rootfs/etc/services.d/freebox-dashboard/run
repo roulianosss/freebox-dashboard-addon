@@ -1,0 +1,69 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Home Assistant Add-on: Freebox Dashboard Wrapper
+# Downloads latest version and runs the application
+# ==============================================================================
+
+bashio::log.info "Starting Freebox Dashboard..."
+
+# Get configuration options
+export FREEBOX_HOST=$(bashio::config 'freebox_host')
+export UPDATE_ON_START=$(bashio::config 'update_on_start')
+export NODE_ENV=production
+export PORT=3000
+export FREEBOX_TOKEN_FILE=/data/freebox_token.json
+
+bashio::log.info "Freebox Host: ${FREEBOX_HOST}"
+
+# Update to latest version if enabled
+if [ "${UPDATE_ON_START}" = "true" ]; then
+    bashio::log.info "Checking for updates from original repository..."
+
+    cd /tmp || bashio::exit.nok "Could not change to /tmp"
+
+    # Clone latest version
+    if git clone --depth 1 https://github.com/HgHugo/FreeboxOS-Ultra-Dashboard.git freebox-update 2>/dev/null; then
+        bashio::log.info "Downloaded latest version, updating..."
+
+        # Backup current version
+        if [ -d /app/server ]; then
+            rm -rf /app.backup 2>/dev/null || true
+            cp -r /app /app.backup
+        fi
+
+        # Copy new version (keep node_modules and dist if they exist)
+        cp -r /tmp/freebox-update/server /app/
+        cp -r /tmp/freebox-update/package*.json /app/ 2>/dev/null || true
+        cp -r /tmp/freebox-update/tsconfig.json /app/ 2>/dev/null || true
+
+        # Check if we need to rebuild
+        if [ -f /tmp/freebox-update/src/main.tsx ]; then
+            bashio::log.info "Updating frontend sources..."
+            cp -r /tmp/freebox-update/src /app/ 2>/dev/null || true
+            cp -r /tmp/freebox-update/vite.config.ts /app/ 2>/dev/null || true
+            cp -r /tmp/freebox-update/index.html /app/ 2>/dev/null || true
+
+            cd /app || bashio::exit.nok "Could not change to /app"
+
+            # Update dependencies if package.json changed
+            bashio::log.info "Updating dependencies..."
+            npm ci --production=false 2>/dev/null || bashio::log.warning "Dependencies update failed, using existing ones"
+
+            # Rebuild frontend
+            bashio::log.info "Rebuilding frontend..."
+            npm run build 2>/dev/null || bashio::log.warning "Build failed, using existing build"
+        fi
+
+        rm -rf /tmp/freebox-update
+        bashio::log.info "Update completed successfully!"
+    else
+        bashio::log.warning "Could not download latest version, using existing installation"
+    fi
+fi
+
+# Change to app directory
+cd /app || bashio::exit.nok "Could not change directory to /app"
+
+# Start the application
+bashio::log.info "Starting Node.js server..."
+exec node --import tsx server/index.ts

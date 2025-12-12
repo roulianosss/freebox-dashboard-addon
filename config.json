@@ -1,0 +1,34 @@
+{
+  "name": "Freebox Dashboard",
+  "version": "1.0.4",
+  "slug": "freebox_dashboard",
+  "description": "Interface web moderne pour gérer votre Freebox (Ultra, Delta, Pop). Surveillance en temps réel, gestion WiFi, VPN, téléchargements, VM, et bien plus.",
+  "url": "https://github.com/HgHugo/FreeboxOS-Ultra-Dashboard",
+  "arch": ["aarch64", "amd64", "armv7"],
+  "startup": "application",
+  "boot": "auto",
+  "init": false,
+  "ports": {
+    "3000/tcp": 7505
+  },
+  "ports_description": {
+    "3000/tcp": "Interface web du dashboard Freebox"
+  },
+  "options": {
+    "freebox_host": "mafreebox.freebox.fr",
+    "log_level": "info",
+    "update_on_start": true
+  },
+  "schema": {
+    "freebox_host": "str",
+    "log_level": "list(debug|info|warning|error)?",
+    "update_on_start": "bool?"
+  },
+  "webui": "http://[HOST]:[PORT:7505]",
+  "panel_icon": "mdi:router-wireless",
+  "panel_title": "Freebox",
+  "host_network": false,
+  "hassio_api": true,
+  "ingress": false,
+  "ingress_port": 0
+}
