@@ -6,7 +6,7 @@
 
 ## 🎯 À propos de cet add-on
 
-Cet add-on est un **wrapper** qui télécharge et exécute automatiquement la dernière version du [Freebox Dashboard original](https://github.com/HgHugo/FreeboxOS-Ultra-Dashboard).
+Cet add-on est un **wrapper** qui télécharge et exécute automatiquement la dernière version du [FreeboxOS Ultra Dashboard](https://github.com/HgHugo/FreeboxOS-Ultra-Dashboard) par [HgHugo](https://github.com/HgHugo) en version Add-on pour Home Assistant.
 
 ## Fonctionnalités
 
