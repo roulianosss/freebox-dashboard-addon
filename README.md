@@ -8,28 +8,9 @@
 
 Cet add-on est un **wrapper** qui télécharge et exécute automatiquement la dernière version du [Freebox Dashboard original](https://github.com/HgHugo/FreeboxOS-Ultra-Dashboard).
 
-### Avantages de cette approche
-
-✅ **Toujours à jour** - Utilise automatiquement la dernière version du projet original
-✅ **Pas de fork à maintenir** - Aucune duplication de code à gérer
-✅ **Mises à jour automatiques** - Option pour télécharger la dernière version à chaque démarrage
-✅ **Code source non modifié** - Utilise directement le code du développeur original
-
 ## Fonctionnalités
 
-Interface web complète pour gérer votre Freebox (Ultra, Delta, Pop) :
-
-- 📊 Surveillance en temps réel de la bande passante
-- 📡 Gestion WiFi (2.4GHz, 5GHz, 6GHz)
-- 🔒 Configuration VPN (OpenVPN, PPTP, WireGuard)
-- 📥 Gestionnaire de téléchargements (torrents)
-- 📁 Explorateur de fichiers avec partage
-- 📞 Journaux d'appels et contacts
-- 📺 Guide TV et enregistrements
-- 💻 Machines virtuelles (Ultra/Delta)
-- 👨‍👩‍👧‍👦 Contrôle parental
-- 🌐 Vue d'ensemble des appareils réseau
-- 📈 Statistiques et analytiques système
+Interface web alternative pour gérer votre Freebox (Ultra, Delta, Pop).
 
 ## Installation
 
@@ -39,7 +20,7 @@ Interface web complète pour gérer votre Freebox (Ultra, Delta, Pop) :
 2. Cliquez sur les **3 points** (⋮) → **Dépôts**
 3. Ajoutez l'URL de ce dépôt :
    ```
-   https://github.com/VOTRE-USERNAME/freebox-dashboard-addon
+   https://github.com/roulianosss/freebox-dashboard-addon
    ```
 4. Cliquez sur **Ajouter**
 
@@ -105,16 +86,6 @@ Pour mettre à jour l'image Docker de l'add-on lui-même :
 1. Allez dans la page de l'add-on
 2. Cliquez sur **Reconstruire** (Rebuild)
 
-## Avantages vs Fork
-
-| Aspect | Fork classique | Wrapper (cet add-on) |
-|--------|----------------|----------------------|
-| Code source | Dupliqué et à maintenir | Toujours synchronisé avec l'original |
-| Mises à jour | Merge manuel régulier | Automatique à chaque démarrage |
-| Maintenance | Nécessite des commits | Aucune maintenance du code |
-| Taille du dépôt | ~50 MB (code complet) | ~5 KB (juste la config) |
-| Personnalisation | Possible | Limitée à la config |
-
 ## Compatibilité
 
 - ✅ Freebox Ultra
@@ -122,25 +93,6 @@ Pour mettre à jour l'image Docker de l'add-on lui-même :
 - ✅ Freebox Pop
 - ✅ Freebox Revolution
 - ✅ Autres modèles compatibles API Freebox
-
-## Dépannage
-
-### L'add-on ne démarre pas
-
-Vérifiez les logs dans l'onglet **Journal** de l'add-on.
-
-### La mise à jour automatique échoue
-
-Si `update_on_start: true` cause des problèmes :
-1. Passez `update_on_start: false` dans la configuration
-2. Redémarrez l'add-on
-3. Il utilisera la version installée lors du build
-
-### Impossible de se connecter à la Freebox
-
-1. Vérifiez que Home Assistant et la Freebox sont sur le même réseau
-2. Testez l'accès : `ping mafreebox.freebox.fr`
-3. Vérifiez que l'API Freebox est activée
 
 ## Crédits
 
