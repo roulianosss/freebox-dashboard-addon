@@ -1,6 +1,6 @@
 {
   "name": "Freebox Dashboard",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "slug": "freebox_dashboard",
   "description": "Interface web moderne pour gérer votre Freebox (Ultra, Delta, Pop). Surveillance en temps réel, gestion WiFi, VPN, téléchargements, VM, et bien plus.",
   "url": "https://github.com/HgHugo/FreeboxOS-Ultra-Dashboard",
