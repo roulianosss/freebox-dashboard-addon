@@ -30,7 +30,7 @@
   "panel_admin": false,
   "host_network": false,
   "hassio_api": true,
-  "ingress": true,
+  "ingress": false,
   "ingress_port": 0,
   "ingress_entry": "/",
   "ingress_stream": false
